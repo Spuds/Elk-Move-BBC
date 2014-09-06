@@ -14,12 +14,12 @@
 	<name>BBC Move Button</name>
 	<version>1.0</version>
 	<type>addon</type>
-	<install for="1.0 RC2 - 1.0.99">
+	<install for="1.0 - 1.0.99">
 		<require-file name="MoveButton.subs.php" destination="SUBSDIR" />
 		<hook hook="integrate_bbc_codes" file="SUBSDIR/MoveButton.subs.php" function="ibc_move_button" />
 		<hook hook="integrate_bbc_buttons" file="SUBSDIR/MoveButton.subs.php" function="ibb_move_button" />
 	</install>
-	<uninstall for="1.0 RC2 - 1.0.99">
+	<uninstall for="1.0 - 1.0.99">
 		<hook reverse="true" hook="integrate_bbc_codes" file="SUBSDIR/MoveButton.subs.php" function="ibc_move_button" />
 		<hook reverse="true" hook="integrate_bbc_buttons" file="SUBSDIR/MoveButton.subs.php" function="ibb_move_button" />
 		<remove-file name="SUBSDIR/MoveButton.subs.php" />

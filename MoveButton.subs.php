@@ -6,7 +6,7 @@
  * @copyright (c) 2011-2014 Spuds
  * @license WTFPL http://www.wtfpl.net/txt/copying/
  *
- * @version 1.0
+ * @version 1.1
  *
  */
 if (!defined('ELK'))
@@ -15,7 +15,7 @@ if (!defined('ELK'))
 /**
  * ibc_move_button
  *
- * - Subs hook, integrate_bbc_codes hook, Called from Subs.php
+ * - Subs hook for 1.0.x, integrate_bbc_codes hook, Called from Subs.php
  * - Used to add[move][/move] parsing values
  *
  * @param mixed[] $codes array of codes as defined for parse_bbc
@@ -38,7 +38,7 @@ function ibc_move_button(&$codes)
 		}
 	}
 
-	// All good, lets add our tag info to the parser, this controls how the tag will render 
+	// All good, lets add our tag info to the parser, this controls how the tag will render
 	// with parse_bbc when found in a post
 	$codes[] = array(
 		'tag' => 'move',
@@ -47,6 +47,29 @@ function ibc_move_button(&$codes)
 		'block_level' => true,
 		'disallow_children' => array('move'),
 	);
+}
+
+/**
+ * iab_move_button
+ *
+ * - Codes hook for 1.1.x, integrate_additional_bbc, Called from ParseWrapper getCodes()
+ *
+ * @param mixed[] $codes array of codes as defined for parse_bbc
+ */
+function iab_move_button(&$codes)
+{
+	// Add our tag info to the parser, this controls how the tag will render
+	$codes[] =
+		array(
+			\BBC\Codes::ATTR_TAG => 'move',
+			\BBC\Codes::ATTR_TYPE => \BBC\Codes::TYPE_PARSED_CONTENT,
+			\BBC\Codes::ATTR_BEFORE => '<marquee>',
+			\BBC\Codes::ATTR_AFTER => '</marquee>',
+			\BBC\Codes::ATTR_DISALLOW_CHILDREN => array('move'),
+			\BBC\Codes::ATTR_BLOCK_LEVEL => true,
+			\BBC\Codes::ATTR_AUTOLINK => false,
+			\BBC\Codes::ATTR_LENGTH => 4,
+		);
 }
 
 /**
@@ -63,7 +86,7 @@ function ibb_move_button(&$bbc_tags)
 
 	// Add the button in the 'bold', 'italic', 'underline', 'strike', 'superscript', 'subscript' group
 	// This can be as simple as $bbc_tags['row1'][0][] = 'move'; to add it at the end
-	// but for this excercise we will insert it afer the strike tag
+	// but for this exercise we will insert it after the strike tag
 
 	// This is the group we intend to modify
 	$where = $bbc_tags['row1'][0];

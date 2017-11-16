@@ -7,12 +7,12 @@
  * @author spuds
  * @license WTFPL http://www.wtfpl.net/txt/copying/
  *
- * @version 1.0
+ * @version 1.1
  */
 	]]></license>
 	<id>spuds:elkbbcmove</id>
 	<name>BBC Move Button</name>
-	<version>1.0</version>
+	<version>1.1</version>
 	<type>addon</type>
 	<install for="1.0 - 1.0.99">
 		<require-file name="MoveButton.subs.php" destination="SUBSDIR" />
@@ -21,6 +21,16 @@
 	</install>
 	<uninstall for="1.0 - 1.0.99">
 		<hook reverse="true" hook="integrate_bbc_codes" file="SUBSDIR/MoveButton.subs.php" function="ibc_move_button" />
+		<hook reverse="true" hook="integrate_bbc_buttons" file="SUBSDIR/MoveButton.subs.php" function="ibb_move_button" />
+		<remove-file name="SUBSDIR/MoveButton.subs.php" />
+	</uninstall>
+	<install for="1.1 - 1.1.99">
+		<require-file name="MoveButton.subs.php" destination="SUBSDIR" />
+		<hook hook="integrate_additional_bbc" file="SUBSDIR/MoveButton.subs.php" function="iab_move_button" />
+		<hook hook="integrate_bbc_buttons" file="SUBSDIR/MoveButton.subs.php" function="ibb_move_button" />
+	</install>
+	<uninstall for="1.1 - 1.1.99">
+		<hook reverse="true" hook="integrate_additional_bbc" file="SUBSDIR/MoveButton.subs.php" function="iab_move_button" />
 		<hook reverse="true" hook="integrate_bbc_buttons" file="SUBSDIR/MoveButton.subs.php" function="ibb_move_button" />
 		<remove-file name="SUBSDIR/MoveButton.subs.php" />
 	</uninstall>
